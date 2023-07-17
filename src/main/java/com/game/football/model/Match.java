@@ -1,4 +1,4 @@
-package com.game.football.scoreboard.model;
+package com.game.football.model;
 
 public class Match {
     private String homeTeam;
