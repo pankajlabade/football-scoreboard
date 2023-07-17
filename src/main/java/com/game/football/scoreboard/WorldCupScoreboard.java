@@ -30,7 +30,10 @@ public class WorldCupScoreboard implements Scoreboard {
      */
     @Override
     public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
-
+        Match match = getMatch(homeTeam, awayTeam);
+        if (null != match) {
+            match.updateScore(homeScore, awayScore);
+        }
     }
 
     /**
@@ -39,7 +42,11 @@ public class WorldCupScoreboard implements Scoreboard {
      */
     @Override
     public void finishMatch(String homeTeam, String awayTeam) {
-
+        Match matchToRemove = getMatch(homeTeam, awayTeam);
+        if (null != matchToRemove) {
+            matchToRemove.finish();
+            matches.remove(matchToRemove);
+        }
     }
 
     /**
@@ -48,5 +55,20 @@ public class WorldCupScoreboard implements Scoreboard {
     @Override
     public int getMatchesCount() {
         return matches.size();
+    }
+
+    /**
+     * @param homeTeam
+     * @param awayTeam
+     * @return
+     */
+    @Override
+    public Match getMatch(String homeTeam, String awayTeam) {
+        for (Match match : matches) {
+            if (match.getHomeTeam().equals(homeTeam) && match.getAwayTeam().equals(awayTeam)) {
+                return match;
+            }
+        }
+        return null;
     }
 }

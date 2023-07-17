@@ -1,4 +1,7 @@
 package com.game.football.scoreboard;
+
+import com.game.football.model.Match;
+
 public interface Scoreboard {
     void startMatch(String homeTeam, String awayTeam);
 
@@ -7,4 +10,6 @@ public interface Scoreboard {
     void finishMatch(String homeTeam, String awayTeam);
 
     int getMatchesCount();
+
+    Match getMatch(String homeTeam, String awayTeam);
 }

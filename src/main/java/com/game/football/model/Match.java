@@ -5,12 +5,14 @@ public class Match {
     private String awayTeam;
     private int homeScore;
     private int awayScore;
+    private boolean finished;
 
     public Match(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = 0;
         this.awayScore = 0;
+        this.finished = false;
     }
 
     public String getHomeTeam() {
@@ -30,7 +32,15 @@ public class Match {
     }
 
     public void updateScore(int homeScore, int awayScore) {
-          this.homeScore = homeScore;
-          this.awayScore = awayScore;
+        if (!finished) {
+            this.homeScore = homeScore;
+            this.awayScore = awayScore;
+        } else {
+            throw new IllegalStateException("Cannot update score for a finished match.");
+        }
+    }
+
+    public void finish() {
+        finished = true;
     }
 }
