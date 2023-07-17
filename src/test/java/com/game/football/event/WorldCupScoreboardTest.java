@@ -1,4 +1,4 @@
-package com.game.football.scoreboard;
+package com.game.football.event;
 
 import com.game.football.model.Match;
 import org.junit.jupiter.api.BeforeEach;
