@@ -4,8 +4,7 @@ import com.game.football.model.Match;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WorldCupScoreboardTest {
     private Scoreboard scoreboard;
@@ -40,6 +39,75 @@ public class WorldCupScoreboardTest {
 
         assertNull(scoreboard.getMatch("Argentina", "Brazil"));
         assertEquals(0, scoreboard.getMatchesCount());
+    }
+
+    @Test
+    public void getMatch_shouldReturnMatchIfExists() {
+        scoreboard.startMatch("Argentina", "Brazil");
+
+        Match match = scoreboard.getMatch("Argentina", "Brazil");
+
+        assertEquals("Argentina", match.getHomeTeam());
+        assertEquals("Brazil", match.getAwayTeam());
+    }
+
+    @Test
+    public void getMatch_shouldReturnNullIfMatchDoesNotExist() {
+        Match match = scoreboard.getMatch("Argentina", "Brazil");
+
+        assertNull(match);
+    }
+
+    @Test
+    public void getMatchesCount_shouldReturnCorrectCount() {
+        scoreboard.startMatch("Argentina", "Brazil");
+        scoreboard.startMatch("Canada", "Denmark");
+        scoreboard.startMatch("England", "France");
+
+        assertEquals(3, scoreboard.getMatchesCount());
+    }
+    @Test
+    public void isMatchInProgress_shouldReturnTrueIfMatchIsInProgress() {
+        scoreboard.startMatch("Argentina", "Brazil");
+
+        assertTrue(scoreboard.isMatchInProgress("Argentina", "Brazil"));
+    }
+
+    @Test
+    public void isMatchInProgress_shouldReturnFalseIfMatchIsFinished() {
+        scoreboard.startMatch("Argentina", "Brazil");
+        scoreboard.finishMatch("Argentina", "Brazil");
+
+        assertFalse(scoreboard.isMatchInProgress("Argentina", "Brazil"));
+    }
+
+    @Test
+    public void isMatchInProgress_shouldReturnFalseIfMatchDoesNotExist() {
+        assertFalse(scoreboard.isMatchInProgress("Argentina", "Brazil"));
+    }
+
+    @Test
+    public void isMatchInProgress_shouldReturnFalseIfNoMatchesExist() {
+        assertFalse(scoreboard.isMatchInProgress("Argentina", "Brazil"));
+    }
+
+    @Test
+    public void isMatchInProgress_shouldReturnFalseIfHomeTeamDoesNotExist() {
+        scoreboard.startMatch("Argentina", "Brazil");
+
+        assertFalse(scoreboard.isMatchInProgress("Team X", "Brazil"));
+    }
+
+    @Test
+    public void isMatchInProgress_shouldReturnFalseIfAwayTeamDoesNotExist() {
+        scoreboard.startMatch("Argentina", "Brazil");
+
+        assertFalse(scoreboard.isMatchInProgress("Argentina", "Team X"));
+    }
+
+    @Test
+    public void isMatchInProgress_shouldReturnFalseIfHomeTeamAndAwayTeamDoNotExist() {
+        assertFalse(scoreboard.isMatchInProgress("Team X", "Team Y"));
     }
     
   }

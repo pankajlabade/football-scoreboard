@@ -43,4 +43,8 @@ public class Match {
     public void finish() {
         finished = true;
     }
+
+    public boolean isFinished() {
+        return finished;
+    }
 }

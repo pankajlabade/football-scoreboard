@@ -12,4 +12,6 @@ public interface Scoreboard {
     int getMatchesCount();
 
     Match getMatch(String homeTeam, String awayTeam);
+
+    boolean isMatchInProgress(String teamX, String teamY);
 }

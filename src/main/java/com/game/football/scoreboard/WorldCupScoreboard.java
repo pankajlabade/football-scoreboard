@@ -71,4 +71,16 @@ public class WorldCupScoreboard implements Scoreboard {
         }
         return null;
     }
+
+    /**
+     * @param homeTeam
+     * @param awayTeam
+     * @return
+     */
+    @Override
+    public boolean isMatchInProgress(String homeTeam, String awayTeam) {
+        Match match = getMatch(homeTeam, awayTeam);
+        return null != match && !match.isFinished();
+    }
+
 }
