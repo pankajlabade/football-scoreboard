@@ -4,6 +4,8 @@ import com.game.football.model.Match;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WorldCupScoreboardTest {
@@ -108,6 +110,38 @@ public class WorldCupScoreboardTest {
     @Test
     public void isMatchInProgress_shouldReturnFalseIfHomeTeamAndAwayTeamDoNotExist() {
         assertFalse(scoreboard.isMatchInProgress("Team X", "Team Y"));
+    }
+
+    @Test
+    public void getMatchesSummary_shouldReturnMatchesInCorrectOrder() {
+        scoreboard.startMatch("Argentina", "Brazil");
+        scoreboard.startMatch("Canada", "Denmark");
+        scoreboard.startMatch("England", "France");
+
+        // Update scores
+        scoreboard.updateScore("Argentina", "Brazil", 2, 1);
+        scoreboard.updateScore("Canada", "Denmark", 1, 1);
+        scoreboard.updateScore("England", "France", 0, 0);
+
+        List<Match> summary = scoreboard.getMatchesSummary();
+
+        // Assert the correct order of matches based on total score and start time
+        assertEquals("Argentina", summary.get(0).getHomeTeam());
+        assertEquals("Brazil", summary.get(0).getAwayTeam());
+        assertEquals("Canada", summary.get(1).getHomeTeam());
+        assertEquals("Denmark", summary.get(1).getAwayTeam());
+        assertEquals("England", summary.get(2).getHomeTeam());
+        assertEquals("France", summary.get(2).getAwayTeam());
+    }
+
+    @Test
+    public void getMatchesSummary_shouldReturnEmptyListIfNoMatchesInProgress() {
+        scoreboard.startMatch("Argentina", "Brazil");
+        scoreboard.finishMatch("Argentina", "Brazil");
+
+        List<Match> summary = scoreboard.getMatchesSummary();
+
+        assertEquals(0, summary.size());
     }
     
   }

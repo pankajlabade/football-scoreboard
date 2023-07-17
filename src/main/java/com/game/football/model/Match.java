@@ -1,15 +1,19 @@
 package com.game.football.model;
 
+import java.util.Date;
+
 public class Match {
     private String homeTeam;
     private String awayTeam;
     private int homeScore;
     private int awayScore;
+    private Date startTime;
     private boolean finished;
 
     public Match(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.startTime = new Date();
         this.homeScore = 0;
         this.awayScore = 0;
         this.finished = false;
@@ -31,6 +35,10 @@ public class Match {
         return awayScore;
     }
 
+    public Date getStartTime() {
+        return startTime;
+    }
+
     public void updateScore(int homeScore, int awayScore) {
         if (!finished) {
             this.homeScore = homeScore;
@@ -46,5 +54,9 @@ public class Match {
 
     public boolean isFinished() {
         return finished;
+    }
+
+    public int getTotalScore() {
+        return homeScore + awayScore;
     }
 }
