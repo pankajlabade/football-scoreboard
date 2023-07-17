@@ -8,6 +8,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * WorldCupScoreboard implements the functionality of Start a new match, Update score,
+ * Finish match currently in progress, Get a summary of matches in progress
+ */
 public class WorldCupScoreboard implements Scoreboard {
     private List<Match> matches;
 
@@ -16,8 +20,9 @@ public class WorldCupScoreboard implements Scoreboard {
     }
 
     /**
-     * @param homeTeam
-     * @param awayTeam
+     * Start a new match
+     * @param homeTeam Home Team
+     * @param awayTeam Away Team
      */
     @Override
     public void startMatch(String homeTeam, String awayTeam) {
@@ -26,10 +31,11 @@ public class WorldCupScoreboard implements Scoreboard {
     }
 
     /**
-     * @param homeTeam
-     * @param awayTeam
-     * @param homeScore
-     * @param awayScore
+     * Update the score of in progress match
+     * @param homeTeam Home Team
+     * @param awayTeam Away Team
+     * @param homeScore Home Team Score
+     * @param awayScore Away Team Score
      */
     @Override
     public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
@@ -40,8 +46,9 @@ public class WorldCupScoreboard implements Scoreboard {
     }
 
     /**
-     * @param homeTeam
-     * @param awayTeam
+     * Finish the match
+     * @param homeTeam Home Team
+     * @param awayTeam Away Team
      */
     @Override
     public void finishMatch(String homeTeam, String awayTeam) {
@@ -53,7 +60,8 @@ public class WorldCupScoreboard implements Scoreboard {
     }
 
     /**
-     * @return
+     * Get total in progress matches
+     * @return total number of in progress matches
      */
     @Override
     public int getMatchesCount() {
@@ -61,9 +69,10 @@ public class WorldCupScoreboard implements Scoreboard {
     }
 
     /**
-     * @param homeTeam
-     * @param awayTeam
-     * @return
+     * Get a match from list of matches
+     * @param homeTeam Home Team
+     * @param awayTeam Away Team
+     * @return Match
      */
     @Override
     public Match getMatch(String homeTeam, String awayTeam) {
@@ -76,9 +85,10 @@ public class WorldCupScoreboard implements Scoreboard {
     }
 
     /**
-     * @param homeTeam
-     * @param awayTeam
-     * @return
+     * Check if match is in progress
+     * @param homeTeam Home Team
+     * @param awayTeam Away Team
+     * @return boolean match in progress
      */
     @Override
     public boolean isMatchInProgress(String homeTeam, String awayTeam) {
@@ -87,7 +97,8 @@ public class WorldCupScoreboard implements Scoreboard {
     }
 
     /**
-     * @return
+     * Get summary of in progress matches
+     * @return List<Match>
      */
     @Override
     public List<Match> getMatchesSummary() {
@@ -106,5 +117,4 @@ public class WorldCupScoreboard implements Scoreboard {
 
         return reversedSummary;
     }
-
 }

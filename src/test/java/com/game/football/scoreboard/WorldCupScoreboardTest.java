@@ -8,6 +8,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class to test the functionality such as start match, update score, summary of in progress matches
+ */
 public class WorldCupScoreboardTest {
     private Scoreboard scoreboard;
 
@@ -143,5 +146,4 @@ public class WorldCupScoreboardTest {
 
         assertEquals(0, summary.size());
     }
-    
   }

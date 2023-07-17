@@ -2,6 +2,9 @@ package com.game.football.model;
 
 import java.util.Date;
 
+/**
+ * Match class with member variables for home and away teamß
+ */
 public class Match {
     private String homeTeam;
     private String awayTeam;
